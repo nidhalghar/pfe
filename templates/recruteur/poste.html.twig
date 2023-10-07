@@ -1,0 +1,99 @@
+{% extends 'base.recruteur.html.twig' %}
+
+{% block title %}Hello RecruteurController!{% endblock %}
+{% block stylesheets %} 
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+        .fixed-form {
+    position: fixed;
+    top: 10%;
+    left: 69%;
+    bottom: 0;
+    width: 90%;
+    padding: 10px;
+    overflow-y: auto;
+}
+</style>
+{% endblock %}
+{% block javascripts %}
+  
+{% endblock %}
+{% block image %}{{asset(user.image)}}{% endblock %}
+{% block body %}
+ <div class="container">
+          <div class="row ">     
+          {% for postes in user.postes %}  
+                     <div class="col-lg-8">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                 <div class="container">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                  <img class="img-profile rounded-circle"src="{{asset(user.image)}}" width="50px">{{app.user.nomsocitie}} </div>                           
+                                           </div>
+                                            <small> Publier le : {{postes.createdAt|date("d-m-Y")}}</small>
+                                            
+                                             
+                                   
+                                  </div>
+                                </div>
+                                <div class="card-body">
+                                  <section class="page-section" id="contact">
+                                   <div class="container">
+                                     <div class="row justify-content-center mb-12">
+                                         <div class="col-lg-12"> 
+                                             <img  src="{{asset(postes.affiche)}}"width="500px">   
+                                         <ul class="fa-ul mb-0">
+                                             <li>
+                                             <i class="fa-li fa fa-check"></i>
+                                           <h4><h3>{{postes.Titre}}</h3></h4> <h5> {{postes.description}}</h5><p>Salaire: {{postes.salaire}}</p></li>      
+                                         <br>
+                                         <br>
+                                         </ul>
+                                      </div>
+                                    </div>
+                                   </div>
+                               </div>
+                           </div>
+                        </div>
+                       {% endfor %}
+                                
+                       <div class="form-container fixed-form">
+                        <div class="col-md-4 "> 
+                            <!-- Default Card Example -->
+                            <div class="card ">
+                                <div class="card-header">
+                                    Gérer Poste
+                                </div>
+                                <div class="card-body">
+                                      <div class="card shadow mb-4">
+                                {{ form_start(PosteForm) }}
+                                <div class="form-group">
+                                    {{ form_row(PosteForm.titre, {'attr': {'class': 'form-control form-control-lg', 'placeholder': 'Titre'}}) }}
+                                </div><div class="form-group">
+                                    {{ form_row(PosteForm.salaire, {'attr': {'class': 'form-control form-control-lg', 'placeholder': 'Salaire'}}) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_row(PosteForm.description, {'attr': {'class': 'form-control form-control-lg', 'placeholder': 'Description'}}) }}
+                                </div>
+                                   <div class="form-group">
+                                    {{ form_row(PosteForm.domaine, {'attr': {'class': 'form-control form-control-lg', 'placeholder': 'Domaine'}}) }}
+                                </div>
+                                <div class="form-check mb-3">
+                                    {{ form_row(PosteForm.photo,{'label': 'image'}) }}
+                                </div>
+                                <div class="container">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <button type="submit" class="btn btn-lg btn-primary">Partager</button></div>
+                                    <br>
+                                {{ form_end(PosteForm) }}       
+                                </div>
+                            </div>
+                        </div>
+                     </div>                           
+                   </div>
+               </div> 
+            </div>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'base.candidat.html.twig' %}
+
+{% block title %} Competence{% endblock %}
+{% block stylesheets %} 
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+        .fixed-form {
+    position: fixed;
+    top: 0;
+    right: 35%;
+    bottom: 0;
+    width: 50%;
+    padding: 100px;
+    overflow-y: auto;
+}
+</style>
+{% endblock %}
+{% block javascripts %}
+  
+{% endblock %}
+{% block image %}{{asset(user.image)}}{% endblock %}
+{% block body %}
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6 border-right">
+        <!-- Deuxième partie de l'écran -->
+        <div class="form-container fixed-form">
+         <h2 class="text-center">Competence</h2>
+           {{ form_start(competencesForm) }}
+             <div class="form-group">
+               {{ form_row(competencesForm.technologies, {'attr': {'class': 'form-control form-control-lg', 'placeholder': 'les techno','onsubmit': 'afficherFormulaire(event)'}}) }}
+             </div>
+             <div class="form-group">
+               {{ form_row(competencesForm.niveau, {'attr': {'class': 'form-control form-control-lg', 'placeholder': 'niveau'}}) }}
+             </div>
+             <div class="form-group">
+               {{ form_row(competencesForm.pourcentage, {'attr': {'class': 'form-control form-control-lg', 'placeholder': 'ecrire en %'}}) }}
+             </div>
+                     <button type="submit" class="btn btn-lg btn-primary">Ajouter</button>
+             <br>
+           {{ form_end(competencesForm) }}
+    </div>
+   </div>
+    <div class="col-md-6 border-left" id="contenu-formulaire">
+        <!-- Première partie de l'écran -->
+        <h2 class="text-center">Portfolio</h2>
+  
+    
+{% endblock %}

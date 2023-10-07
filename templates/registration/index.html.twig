@@ -1,0 +1,58 @@
+{% extends 'base1.html.twig' %}
+
+{% block title %}Hello RegistrationController!{% endblock %}
+
+{% block stylesheets %}
+<style>
+.card-wrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+}
+
+.card {
+	margin: auto;
+	max-width: 600px;
+  
+}
+  body {
+  background: linear-gradient(to bottom right, #92c5fe 0%, #cbc2fb 100%);
+  font-family: "Open Sans", sans-serif;
+  min-height: 90vh;
+}
+		.card {
+			margin-top: 300px;
+		}
+		h1 {
+			text-align: center;
+		}
+</style>{% endblock %}
+{% block body %}
+	<link href="{{asset("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css")}}" rel="stylesheet">
+	<link href="{{asset("https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css")}}" rel="stylesheet">
+
+<body>
+<section class="h-100">
+	<div class="container h-100">
+		<div class="row justify-content-center align-items-center h-100">
+			<div class="card-wrapper">
+				<div class="card fat">
+					<div class="card-body">
+						<div class="panel-heading text-center">
+                            <h1>Vous pouvez vous inscrire en tant que ?</h1>
+							<a class="btn btn-lg btn-primary" href="{{ path('app_register_recruteur') }}" role="button">
+								<i class="fa-3x far fa-user"></i><br>Recruteur
+							</a>
+							<a class="btn btn-lg btn-success" href="{{ path('app_register_candidat') }}" role="button">
+								<i class="fa-3x far fa-user"></i><br>Candidat
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+</body>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'base1.html.twig' %}
+
+{% block title %}Reset your password{% endblock %}
+
+{% block body %}
+    {% for flash_error in app.flashes('reset_password_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+    <br>
+<br>
+
+
+    <div class="form-gap"></div>
+    
+    <div class="container h-100">
+        <div class="row justify-content-md-center align-items-center h-100">
+            <div class="card-wrapper">
+                <div class="card fat">
+                    <div class="card-body">
+                        <div class="text-center">
+                            <h3><i class="fa fa-lock fa-4x"></i></h3>
+                            <h1>réinitialisez votre mot de passe</h1>
+                            <p>Vous pouvez réinitialiser votre mot de passe ici.</p>
+                        </div>
+                        
+                        {{ form_start(requestForm) }}
+                        <div class="form-group">
+                            {{ form_row(requestForm.email, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        
+                        <button class="btn btn-primary btn-lg btn-block">Envoyer un e-mail de réinitialisation du mot de passe</button>
+                        
+                        {{ form_end(requestForm) }}
+                    </div>
+                    
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/my-login.css">
+{% endblock %}

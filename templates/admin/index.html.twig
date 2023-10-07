@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+{% block stylesheets %} 
+<style>
+    .offcanvas-bottom {
+  height: 80vh;
+}
+</style>
+{% endblock %}
+{% block body %}
+<section class="container">
+  <div class="row">
+    <div class="col-12">
+       <h2>Boite de réception</h2>
+       <p> Vous avez Reçus : {{ messag|length }}</p>
+      </div>
+      <table class="table">
+        <thead>
+            <tr>
+                <th>De</th>
+                <th>Sujet</th>
+                <th>Date</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for message in messag %}
+          {% set bold = ""%}
+    
+            <tr>
+                <td  class =" {{bold}}">{{message.email}}</td>
+                <td  class ="{{bold}}"><a href="{{ path("app_read",{id:message.id})}}">{{message.nom}}</a></td>
+                <td  class =" {{bold}}">{{message.createdAt|date}}</td>
+                <td><a href="{{ path("app_delete",{id: message.id})}}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-excel-fill text-danger" viewBox="0 0 16 16">
+                        <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM5.884 4.68 8 7.219l2.116-2.54a.5.5 0 1 1 .768.641L8.651 8l2.233 2.68a.5.5 0 0 1-.768.64L8 8.781l-2.116 2.54a.5.5 0 0 1-.768-.641L7.349 8 5.116 5.32a.5.5 0 1 1 .768-.64z"/>
+                      </svg></a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% endblock %}

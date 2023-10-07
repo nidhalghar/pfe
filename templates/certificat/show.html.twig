@@ -1,0 +1,40 @@
+{% extends 'base.certificat.html.twig' %}
+{% block image %}{{asset(app.user.image)}}{% endblock %}
+{% block title %}Certificat{% endblock %}
+
+{% block body %}
+    <div class="container">
+  <div class="card">
+    <div class="card-header">
+      <h1>Certificat</h1>
+    </div>
+    <div class="card-body">
+      <table class="table">
+        <tbody>
+          <tr>
+            <th>Id</th>
+            <td>{{ certificat.id }}</td>
+          </tr>
+          <tr>
+            <th>Duree</th>
+            <td>{{ certificat.duree }}</td>
+          </tr>
+          <tr>
+            <th>Domaine</th>
+            <td>{{ certificat.domaine }}</td>
+          </tr>
+          <tr>
+            <th>NomCertificat</th>
+            <td>{{ certificat.NomCertificat }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card-footer">
+      <a href="{{ path('app_certificat_index') }}" class="btn btn-secondary mr-2"><i class="fas fa-arrow-left"></i> Back to list</a>
+      <a href="{{ path('app_certificat_edit', {'id': certificat.id}) }}" class="btn btn-primary mr-2"><i class="fas fa-edit"></i> Edit</a>
+      {{ include('certificat/_delete_form.html.twig') }}
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base.certificat.html.twig' %}
+{% block image %}{{asset(app.user.image)}}{% endblock %}
+{% block title %}Edit Projetspersonnel{% endblock %}
+
+{% block body %}
+  <div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h1 class="text-center">Edit Projetspersonnel</h1>
+        </div>
+        <div class="card-body">
+          {{ include('projetspersonnels/_form.html.twig', {'button_label': 'Update'}) }}
+        </div>
+        <div class="card-footer text-center">
+          <a href="{{ path('app_projetspersonnels_index') }}" class="btn btn-secondary mr-2">Back to list</a>
+          {{ include('projetspersonnels/_delete_form.html.twig') }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

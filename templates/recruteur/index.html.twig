@@ -1,0 +1,100 @@
+{% extends 'base.recruteur.html.twig' %}
+
+{% block title %}Hello RecruteurController!{% endblock %}
+{% block stylesheets %} 
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+{% endblock %}
+{% block javascripts %}
+  
+{% endblock %}
+{% block image %}{{asset(user.image)}}{% endblock %}
+{% block body %}
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Recherche Avancé</h1>
+                    </div>
+                    
+                    <form method="POST" action="{{path('app_recruteur-dashboard')}}">
+                      <div class="container">
+                        <div class="row ">
+                            <div class="col-md-6 col-lg-5">
+                                <div class="form-group">
+                                    <input type="Domaine" name="domaine" class="form-control" id="inputEmail2" placeholder="saisir le domaine">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-5">
+                                <div class="form-group">
+                                    <input type="Experience" name="experience" class="form-control" id="inputEmail2" placeholder="saisir l'experience">
+                                </div>
+                            </div>
+                        </div>
+                        <br>    
+                        <div class="row ">
+                            <div class="col-md-6 col-lg-5">
+                                <div class="form-group">
+                                    <input type="Certificat" name="certificat" class="form-control" id="inputEmail2" placeholder="saisir le nom de certification">
+                                </div>
+                            </div>
+                            <div class="col-md-9 col-lg-5">
+                                <div class="form-group">
+                                    <input type="Competence" name="competence" class="form-control" id="inputEmail2" placeholder="saisir le competence">
+                                </div>  
+                            </div>
+                            <div class="col-md-2 col-lg-2"> 
+                                <select id="inputEmail2" name="niveau" class="form-control">
+                                    <option selected value="debutant">debutant</option>
+                                    <option value="moyen">moyen</option>
+                                    <option value="bien">bien</option>
+                                    <option value="expert">expert</option>
+                                </select>
+                            </div> 
+                        <br>
+                        <br>
+                        <br>
+                            <div class="col-md-12 col-lg-8">
+                                <button type="submit" class="btn btn-primary">Rechercher</button>
+                            </div>
+                        </div>
+                    </form>
+                    <br>
+                    <br>
+                            {% if users is not empty %}
+                            <div class="media block-8 services d-block bg-white rounded-lg shadow ftco-animate">
+                                <table class="table">
+                            <thead>
+                                <tr>
+                                <th scope="col">image</th>
+                                <th scope="col">nom</th>
+                                <th scope="col">prenom</th>
+                                <th scope="col">email</th>
+                                <th scope="col">lien</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>{% for user in users   %}
+                                <th scope="row"><img class="img-profile rounded-circle"src="{{asset(user.image)}}" width="50px"></th>
+                                <td>{{ user.nom }}</td>
+                                <td>{{ user.prenom }}</td>
+                                <td>{{ user.email }}</td>
+                                <td><a href="{{ path('app_portfolio_link_public', {'link': user.id}) }}">Voir</a></td>
+                                </tr> {% endfor %}
+                            </tbody>
+                            </table>
+                            {% endif %} 
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Its PRO'COMM</span>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+{% endblock %}

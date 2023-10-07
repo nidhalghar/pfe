@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User index{% endblock %}
+{% block stylesheets %}
+<style>
+.table-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.table {
+  width: 90%;
+  margin-bottom: 20px;
+}
+
+.table-wrapper a.btn-success {
+  margin-top: 20px;
+}
+</style>{% endblock %}
+{% block body %}
+<div class="table-wrapper">
+   <h1>User index</h1>
+
+<div class="table-wrapper">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Email</th>
+        <th>Nom</th>
+        <th>telephone</th>
+        <th>Date de naissance</th>
+        <th>Address</th>
+        <th>Domain</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in users %}
+      <tr>
+        <td>{{ user.id }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.nom }} {{ user.prenom }}</td>
+        <td>{{ user.numtel }}</td>
+        <td>{{ user.datedenaissance ? user.datedenaissance|date('Y-m-d') : '' }}</td>
+        <td>{{ user.addresse }}</td>
+        <td>{{ user.domaine }}</td>
+        <td>
+          <a href="{{ path('app_admin_user_show', {'id': user.id}) }}" class="btn btn-primary"><i class="fas fa-eye"></i></a>
+          <a href="{{ path('app_admin_user_edit', {'id': user.id}) }}" class="btn btn-secondary"><i class="fas fa-edit"></i></a>
+        </td>
+      </tr>
+      {% else %}
+      <tr>
+        <td colspan="9">No records found.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<a href="{{ path('app_admin_user_new') }}" class="btn btn-success">Create new</a></div></div>
+{% endblock %}

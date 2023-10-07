@@ -1,0 +1,72 @@
+{% extends 'base.recruteur.html.twig' %}
+
+{% block title %}Parametres{% endblock %}
+{% block stylesheets %} 
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+{% endblock %}
+{% block javascripts %}
+  
+{% endblock %}
+{% block image %}{{asset(user.image)}}{% endblock %}
+{% block body %}
+  <div class="card shadow mb-4">
+   <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+  <h6 class="m-0 font-weight-bold text-primary text-center">Paramètres</h6>
+</div>
+
+    <div class="card-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="form-container fixed-form">
+                        {{ form_start(parametresForm) }}
+                            <div class="form-group">
+                                {{ form_row(parametresForm.loisires, {'attr': {'class': 'form-control form-control-lg', 'placeholder': 'Loisirs'}}) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(parametresForm.facebook, {'attr': {'class': 'form-control form-control-lg', 'placeholder': 'Facebook'}}) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(parametresForm.linkidin, {'attr': {'class': 'form-control form-control-lg', 'placeholder': 'Linkedin'}}) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(parametresForm.twitter, {'attr': {'class': 'form-control form-control-lg', 'placeholder': 'Twitter'}}) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(parametresForm.git, {'attr': {'class': 'form-control form-control-lg', 'placeholder': 'Git'}}) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(parametresForm.paragraphe, {'attr': {'class': 'form-control form-control-lg', 'placeholder': 'Saisir un paragraphe'}}) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(parametresForm.linkPublic, {'attr': {'class': 'form-control form-control-lg', 'placeholder': 'Saisir le lien public'}}) }}
+                            </div>
+                             <div class="form-group">
+                                {{ form_row(parametresForm.Cv, {'attr': {'class': 'form-control form-control-lg', 'placeholder': 'Saisir le lien de votre Cv'}}) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(parametresForm.photo, 'Photo') }}
+                                <div class="input-group">
+                                    <div class="custom-file">
+                                        {{ form_widget(parametresForm.photo, {'attr': {'class': 'custom-file-input', 'id': 'photo-input', 'aria-describedby': 'photo-label', 'accept': 'image/*'}}) }}
+                                        <label class="custom-file-label" for="photo-input">Choisissez une photo de profil</label>
+                                    </div>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" id="photo-label"><i class="fa fa-upload"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-lg btn-primary mx-auto">Exécuter</button>
+                            <br>
+                        {{ form_end(parametresForm) }} 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+{% endblock %}

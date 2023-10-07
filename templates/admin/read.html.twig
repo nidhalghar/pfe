@@ -1,0 +1,100 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %} 
+<style>
+  /* Police de caractères personnalisée */
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+  
+  /* Style de la card */
+  .card {
+    font-family: 'Roboto', sans-serif;
+    border: none;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    margin: 50px auto;
+    max-width: 700px;
+  }
+  
+  /* Style du header de la card */
+  .card-header {
+    background-color: #007bff;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+  }
+  
+  /* Style du titre principal */
+  .card-title {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  /* Style du sous-titre */
+  .card-subtitle {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  /* Style du texte du header */
+  .card-text {
+    font-size: 1rem;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  /* Style de la date à droite */
+  .text-end {
+    text-align: right;
+  }
+  
+  /* Style du corps de la card */
+  .card-body {
+    font-size: 1.2rem;
+    padding: 30px;
+  }
+  
+  /* Style du texte du corps de la card */
+  .card-body p {
+    line-height: 1.5;
+    margin-bottom: 20px;
+    text-align: justify;
+  }
+</style>
+{% endblock %}
+{% block body %}
+<section class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="card mb-4">
+    <div class="card-header bg-primary text-white">
+        <h1 class="card-title mb-0"><i class="fas fa-envelope-open-text me-2"></i>Contact</h1>
+    </div>
+   <div class="card-body">
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="fs-4">
+               Sujet :  {{ message.sujet }}
+            </h3>
+            <p class="fs-6 mb-1">
+                Message de : {{ message.nom }}
+            </p>
+            <p class="fs-7">
+                Le {{ message.createdAt|date("d/m/Y à H:i:s") }}
+            </p>
+            <hr>
+            <div class="message-content">
+            contenu :
+                <p class="fs-5">{{ message.message }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+    </div>
+  </div>
+</section>
+     
+{% endblock %}

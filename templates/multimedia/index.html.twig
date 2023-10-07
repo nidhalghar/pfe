@@ -1,0 +1,39 @@
+{% extends 'base.certificat.html.twig' %}
+{% block image %}{{asset(app.user.image)}}{% endblock %}
+{% block title %}Multimedia index{% endblock %}
+
+{% block body %}
+    <h1>Multimedia index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Type</th>
+                <th>Lien</th>
+                <th>Image</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for multimedia in multimedia %}
+            <tr>
+                <td>{{ multimedia.id }}</td>
+                <td>{{ multimedia.type }}</td>
+                <td>{{ multimedia.lien }}</td>
+                <td>{{ multimedia.image }}</td>
+                <td>
+                    <a href="{{ path('app_multimedia_show', {'id': multimedia.id}) }}">show</a>
+                    <a href="{{ path('app_multimedia_edit', {'id': multimedia.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_projetspersonnel') }}">Create new</a>
+{% endblock %}

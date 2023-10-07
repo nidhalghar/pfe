@@ -1,0 +1,40 @@
+{% extends 'base.certificat.html.twig' %}
+{% block image %}{{asset(app.user.image)}}{% endblock %}
+{% block title %}Experience{% endblock %}
+
+{% block body %}
+  <h1 class="text-center mb-5">Experience</h1>
+
+<table class="table">
+    <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ experience.id }}</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>{{ experience.description }}</td>
+        </tr>
+        <tr>
+            <th>Date de début</th>
+            <td>{{ experience.datededebut ? experience.datededebut|date('Y-m-d') : '' }}</td>
+        </tr>
+        <tr>
+            <th>Date de fin</th>
+            <td>{{ experience.datedefin ? experience.datedefin|date('Y-m-d') : '' }}</td>
+        </tr>
+        <tr>
+            <th>Nom de l'expérience</th>
+            <td>{{ experience.nomexperience }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="d-flex justify-content-center mt-5">
+    <a href="{{ path('app_experiences_index') }}" class="btn btn-sm btn-primary mr-2"><i class="fas fa-arrow-circle-left mr-2"></i>Retour à la liste</a>
+    <a href="{{ path('app_experiences_edit', {'id': experience.id}) }}" class="btn btn-sm btn-primary"><i class="fas fa-edit mr-2"></i>Modifier</a>
+</div>
+
+{{ include('experiences/_delete_form.html.twig') }}
+
+{% endblock %}

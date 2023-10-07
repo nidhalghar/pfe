@@ -1,0 +1,107 @@
+{% extends 'base.certificat.html.twig' %}
+
+{% block title %}Hello ParametresController!{% endblock %}
+{% block stylesheets %} 
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+        .fixed-form {
+    position: fixed;
+    top: 0;
+    right: 35%;
+    bottom: 0;
+    width: 50%;
+    padding: 100px;
+    overflow-y: auto;
+}
+</style>
+{% endblock %}
+{% block javascripts %}
+  
+{% endblock %}
+{% block image %}{{asset(app.user.image)}}{% endblock %}
+{% block body %}
+<!-- Begin Page Content -->
+<div class="container-fluid">
+    <!-- Page Heading -->
+   <div class="d-sm-flex align-items-center justify-content-center mb-4">
+    <h1 class="h3 mb-0 text-gray-800 text-center mx-auto">Recherche Avancée</h1>
+</div>
+
+
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div class="card shadow mb-4">
+                <div class="card-body">
+                    <form method="POST" action="{{ path('app_search') }}">
+                        <div class="form-group">
+                            <label for="domaine">Domaine</label>
+                            <div class="input-group">
+                                <input type="text" name="domaine" class="form-control" id="domaine" placeholder="Saisir le domaine">
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="fas fa-briefcase"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="adresse">Adresse</label>
+                            <div class="input-group">
+                                <input type="text" name="adresse" class="form-control" id="adresse" placeholder="Saisir l'adresse">
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="nomsociete">Nom de société</label>
+                            <div class="input-group">
+                                <input type="text" name="nomsociete" class="form-control" id="nomsociete" placeholder="Saisir le nom de société">
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="fas fa-building"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i> Rechercher</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+    <br>
+    <br>
+    
+    {% if postes is not empty %}
+    <div class="media block-8 services d-block bg-white rounded-lg shadow ftco-animate">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Image</th>
+                    <th scope="col">Titre de poste</th>
+                    <th scope="col">salaire</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Contact</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for poste in postes %}
+                <tr>
+                    <td><img class="img-profile rounded-circle" src="{{ asset(poste.image) }}" width="50px"></td>
+                    <td>{{ poste.titre}}</td>
+                    <td>{{ poste. salaire }}</td>
+                    <td>{{ poste.email }}</td>
+                    <td><a href="{{ path('app_messages', {'link': poste.id}) }}" class="btn btn-primary"><i class="fas fa-envelope"></i> </a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+</div>
+
+
+{% endblock %}

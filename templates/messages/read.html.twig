@@ -1,0 +1,126 @@
+{% if app.user.roles[0] == 'ROLE_RECRUTEUR' %}
+    {% include 'base.recruteur.html.twig' %}
+{% elseif app.user.roles[0] == 'ROLE_CANDIDAT' %}
+    {% include 'base.msg.html.twig' %}
+{% endif %}
+{% block stylesheets %} 
+<style>
+  /* Police de caractères personnalisée */
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+  
+  /* Style de la card */
+  .card {
+    font-family: 'Roboto', sans-serif;
+    border: none;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    margin: 50px auto;
+    max-width: 700px;
+  }
+  
+  /* Style du header de la card */
+  .card-header {
+    background-color: #007bff;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+  }
+  
+  /* Style du titre principal */
+  .card-title {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  /* Style du sous-titre */
+  .card-subtitle {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  /* Style du texte du header */
+  .card-text {
+    font-size: 1rem;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  /* Style de la date à droite */
+  .text-end {
+    text-align: right;
+  }
+  
+  /* Style du corps de la card */
+  .card-body {
+    font-size: 1.2rem;
+    padding: 30px;
+  }
+  
+  /* Style du texte du corps de la card */
+  .card-body p {
+    line-height: 1.5;
+    margin-bottom: 20px;
+    text-align: justify;
+  }
+</style>
+{% endblock %}
+{% block body %}
+<section class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="card mb-4">
+    <div class="card-header bg-primary text-white">
+        <h1 class="card-title mb-0"><i class="fas fa-envelope-open-text me-2"></i>Messagerie</h1>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-2">
+                <i class="far fa-envelope fa-3x"></i>
+            </div>
+            <div class="col-md-10">
+               <h3 class="fs-4"><i class="fas fa-heading me-2"></i>{{ message.titre }}</h3>
+<p class="fs-6 mb-1"><i class="fas fa-user me-2"></i>Message de : {{ message.sender.email }}</p>
+<p class="fs-7"><i class="fas fa-calendar-alt me-2"></i>Le {{ message.createdAt|date("d/m/Y à H:i:s") }}</p><hr>
+                <p class="fs-6">{{ message.message }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+      <div class="d-flex justify-content-center">
+        <a class="btn btn-primary me-3" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+          Voir mes dossiers
+        </a>
+        <a href="{{path("app_recevied")}}" class="btn btn-primary">
+          Retour à la boite de réception
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+      <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+  <div class="offcanvas-header">
+    <h2 class="offcanvas-title" id="offcanvasExampleLabel">Mes Dossiers</h2>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+     <div class="list-group">
+     <a href="{{path("app_messages")}}" class="list-group-item list-group-item-action ">Acceuil</a>
+     </div> 
+        <div class="list-group">
+  <a href="{{ path("app_recevied") }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+    Boîte de réception
+    <span class="badge bg-primary rounded-pill">{{ app.user.received|length }}</span>
+  </a>
+</div>
+      <div class="list-group">
+  <a href="{{ path("app_sent") }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+    Elément envoyer
+    <span class="badge bg-primary rounded-pill">{{ app.user.sent|length }}</span>
+  </a>
+</div>
+</div>
+{% endblock %}

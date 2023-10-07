@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+        <link href="{{asset("vendor/bootstrap/css/bootstrap.min.css")}}" rel="stylesheet"
+        <!-- Custom fonts for this template -->
+        <link href="{{asset("https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:100,200,300,400,500,600,700,800,900")}}" rel="stylesheet">
+        <link href="{{asset("https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i")}}" rel="stylesheet">
+        <link href="{{asset("vendor/font-awesome/css/font-awesome.min.css")}}" rel="stylesheet">
+        <link href="{{asset("vendor/devicons/css/devicons.min.css")}}" rel="stylesheet">
+        <link href="{{asset("vendor/simple-line-icons/css/simple-line-icons.css")}}" rel="stylesheet">
+        <link href="{{asset('https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900')}}" rel="stylesheet">
+        <link rel="stylesheet" href="{{asset('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')}}">
+        <link rel="stylesheet" href="{{asset('css/animate.css')}}">
+        <link rel="stylesheet" href="{{asset('css/owl.carousel.min.css')}}">
+        <link rel="stylesheet" href="{{asset('css/owl.theme.default.min.css')}}">
+        <link rel="stylesheet" href="{{asset('css/magnific-popup.css')}}">
+        <link rel="stylesheet" href="{{asset('css/flaticon.css')}}">
+        <link rel="stylesheet" href="{{asset('css/style.css')}}">
+        <!-- Custom styles for this template -->
+        <link href="{{asset("css/resume.min.css")}}" rel="stylesheet">
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+    </head>
+    <body id="page-top">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+     <a class="navbar-brand" >Portfolio</a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+       <ul class="navbar-nav mr-auto"> 
+       </ul>
+       <ul>
+        
+             <a class="nav-link" href="{{path('app_profil')}}"><span class="fa fa-file"></span></a>
+           </ul>
+     
+        <ul>
+             <a class="nav-link" href="{{path('app_home')}}"><span class="fa fa-home  "></span></a>
+           </ul>
+        <ul class="nav-item dropdown">
+           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+           <span class="fa fa-bars "></span>  </a>
+           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a href="{{path('app_certification')}}" class="w3-bar-item w3-button  w3-hover-none w3-hover-text-blue dropdown-item">  certification</a>
+              <a href="{{path('app_projetspersonnel')}}" class="w3-bar-item w3-button  w3-hover-none w3-hover-text-blue dropdown-item">   projetspersonnel</a>
+              <a href="{{path('app_parametres')}}" class="w3-bar-item w3-button  w3-hover-none w3-hover-text-green dropdown-item">  paramètres</a>
+              <a href="{{path('app_competence')}}" class="w3-bar-item w3-button  w3-hover-none w3-hover-text-yellow dropdown-item">  compétence</a>
+              <a href="{{path('app_education')}}" class="w3-bar-item w3-button  w3-hover-none w3-hover-text-pink dropdown-item"> éducation</a>
+              <a href="{{path('app_experience')}}" class="w3-bar-item w3-button  w3-hover-none w3-hover-text-grey dropdown-item">  experiénce</a>
+           </div>
+          </ul>
+           <ul class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-envelope fa-fw"></i>
+                                <!-- Counter - Messages -->
+                                <span class="badge badge-danger badge-counter">{{app.user.received|length}}</span>
+                            </a>
+                            <!-- Dropdown - Messages -->
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="messagesDropdown">
+                                <h6 class="dropdown-header">
+                                    Discussions
+                                </h6>{% for message in app.user.received %}
+                                <a class="dropdown-item d-flex align-items-center" href="{{path("app_messages")}}">
+                                    <div class="dropdown-list-image mr-3">
+                                        <img class="rounded-circle" src="{{asset(message.sender.image)}}" width="50px" 
+                                            alt="...">
+                                        <div class="status-indicator bg-success"></div>
+                                    </div>
+                                    <div class="font-weight-bold">
+                                        <div class="text-truncate">{{message.message}}</div>
+                                        <div class="small text-gray-500">{{message.sender.nom}}{{message.sender.prenom}} · {{message.createdAt|date}}</div>
+                                    </div> 
+                                </a>{% endfor %}
+                                
+                               
+                            </div>
+                        </ul>
+       {% if app.user != null %}
+        <ul><span class="fa fa-user-circle">
+       {{ app.user.nom }}
+       </span>
+       </ul>
+       {% else %}
+       <ul class="nav navbar-nav navbar-right">
+         <li><a href="{{path('app_register')}}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+         <li><a href="{{path('app_login')}}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+       </ul>
+          {% endif %}
+    </div>
+ </nav>
+ <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">
+            <span class="d-none d-lg-block">
+            <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="{% block image %}{{asset(app.user.image)}}{% endblock %}" alt="">
+            </span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <br>
+        <br>
+        <br>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="#about-section">A propos de moi</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="#experience">Experience</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="#education">Education</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="#skills-section">Competences</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="#interests">Centres d'interet</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="#awards">Certification</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="#projects">Projects</a>
+            </li>
+            </ul>
+        </div>
+      </nav>
+<div class="cursor"></div>
+        {% block body %} 
+{% endblock %}
+<div class="container-fluid p-0">
+     <section id="home-section" class="hero">
+		<div class="home-slider owl-carousel">
+			<div class="slider-item">
+				<div class="overlay"></div>
+				<div class="container-fluid px-md-0">
+					<div class="row d-md-flex no-gutters slider-text align-items-end justify-content-end" data-scrollax-parent="true">
+          <img src="{{asset('images/about-1.jpg')}}"> 
+							<div class="overlay"></div>
+							<div class="overlay-1"></div>
+						<div class="one-forth d-flex  align-items-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
+							<div class="text">
+								<span class="subheading">Bienvenu dans mon Portfolio</span>
+								<h1 class="mb-4 mt-3">{{ user.nom }}{{ user.prenom }}</h1>
+							<p><a href="{{path('app_messages')}}"  class="btn btn-primary">Contact</a>{% for parametres in user.parametres %} <a href="{{parametres.cv}}" class="btn btn-primary btn-outline-primary">Voir Mon CV</a>{% endfor %}</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="slider-item">
+				<div class="overlay"></div>
+				<div class="container-fluid px-md-0">
+					<div class="row d-flex no-gutters slider-text align-items-end justify-content-end" data-scrollax-parent="true">
+            	<div class="one-third order-md-last img" style="background-image:url(images/bg_2.jpg);">
+							<div class="overlay"></div>
+							<div class="overlay-1"></div>
+						</div>
+						<div class="one-forth d-flex align-items-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
+						<div class="text">
+								<span class="subheading">Bienvenu dans mon Portfolio</span>
+								<h1 class="mb-4 mt-3">{{ user.nom }}{{ user.prenom }}</h1>
+							<p><a href="{{path('app_messages')}}" class="btn btn-primary">Contact</a>{% for parametres in user.parametres %} <a href="{{parametres.cv}}" class="btn btn-primary btn-outline-primary">Voir Mon CV</a>{% endfor %}</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section><section class="ftco-about ftco-section ftco-no-pt ftco-no-pb" id="about-section">
+		<div class="container">
+         
+			<div class="row d-flex no-gutters">
+				<div class="col-md-8 col-lg-5 d-flex">
+					<div class="img-about img d-flex align-items-stretch">
+						<div class="overlay"></div>
+            
+						<img src="{{asset('img/wwww.png')}}"width="250px" > 
+            </div>
+				</div>
+        
+				<div class="col-md-6 col-lg-7 pl-md-4 pl-lg-5 py-5">
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+					<div class="py-md-5">
+						<div class=" row progress-circle mb-5">
+							<div class="col-md-10 heading-section ftco-animate">
+               <div class="resume-item d-flex flex-column flex-md-row mb-5">
+                <div class="row progress-circle mb-5">
+                      <div class="col-lg-12 mb-5">
+                        <div class="bg-white rounded-lg shadow p-4">
+                          <div class="resume-item d-flex flex-column flex-md-row mb-5">
+                            <div class="resume-content mr-auto">
+                                  <div class="resume-content mr-auto">
+                                  <span class="subheading">Mon Introduction</span>
+                                  <h2 class="mb-4" style="font-size: 34px; text-transform: capitalize;"><i class="fa fa-address-book-o"></i>A propos de moi</h2>
+                                  {% for parametres in user.parametres %}<p class="mb-4 mt-3">{{parametres.paragraphe}}</p>{% endfor %}
+                                  <ul class="about-info mt-4 px-md-0 px-2">
+                                    <li class="d-flex"><span>Nom:</span> <span>{{user.nom}}{{user.prenom}}</span></li>
+                                    <li class="d-flex"><span>Date de Naissance:</span> <span>{{user.datedenaissance|date("Y-m-d")}}</span></li>
+                                    <li class="d-flex"><span>Addresse:</span> <span>{{user.addresse}}</span></li>
+                                    <li class="d-flex"><span>code Postal:</span> <span>{{user.codePostal}}</span></li>
+                                    <li class="d-flex"><span>Email:</span> <span>{{user.email}}</span></li>
+                                    <li class="d-flex"><span>Telephone: </span> <span>{{user.numtel}}</span></li>
+                                  </ul>
+                              </div>
+                            </div>
+                        </div>
+                      </div>
+                  </div>
+						   </div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+     <div class="card ">                      
+      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="experience">
+        <div class="my-auto ftco-animate">
+          <h2 class="mb-5"><i class="fa fa-dot-circle-o"></i>Experience</h2>
+           <div>
+              {% for experience in user.experience %}
+          <div class="resume-item d-flex flex-column flex-md-row mb-5">
+      
+            <div class="resume-content mr-auto">
+              <h4 class="mb-0">{{experience.Nomexperience}}</h4>
+              <div class="subheading mb-1"><p>{{experience.Description}}</p></div>
+              
+            </div>
+            <div class="resume-date text-md-right">
+              <span class="text-primary">{{experience.datededebut|date("Y-m-d")}} - {{experience.datedefin|date("Y-m-d")}}</span>
+            </div>
+          </div>
+      
+           {% for mission in experience.mission %}
+             <div class="resume-item d-flex flex-column flex-md-row mb-5">
+               <div class="resume-content mr-auto">
+               <div class="media block-8 services d-block bg-white rounded-lg shadow ftco-animate">
+					      	<div class="icon d-flex align-items-center justify-content-center"><i class="fa fa-users"></i></div>
+                 <h4 class="mb-0">Missions:</h4>
+                 <div >{{mission.poste}}</div><button type="submit" class="btn btn-lg btn-primary"><a  href="{{path('app_mission_index')}}"><span class="fa fa-edit  "></span>Edit Mission</a></button>
+               </div>
+             </div>
+				<div class="col-lg-6 mb-5">	
+          {% for projet in experience.projet %}
+          <div class="resume-item d-flex flex-column flex-md-row mb-5">
+            <div class="resume-content mr-auto">
+            <div class="media block-8 services d-block bg-white rounded-lg shadow ftco-animate">
+					      	<div class="icon d-flex align-items-center justify-content-center"><i class="fa fa-briefcase"></i></div>
+              <h4 class="mb-0">Project:</h4>
+              <div >{{projet.technologies}}</div>
+              <p>{{projet.description}}</p><button type="submit" class="btn btn-lg btn-primary"><a  href="{{path('app_projet_index')}}"><span class="fa fa-edit  "></span>Edit projet</a></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+           {% endfor %}
+                {% endfor %}
+             {% endfor %}
+          </div><button type="submit" class="btn btn-lg btn-primary"><a  href="{{path('app_experiences_index')}}"><span class="fa fa-edit  "></span>Edit experience</a></button>
+        </div>
+    </div>
+</section>
+      </div>
+
+      <section class="ftco-about ftco-section ftco-no-pt ftco-no-pb" id="education">
+		<div class="container">
+			<div class="row d-flex no-gutters">
+				<div class="col-md-4 col-lg-5 d-flex">
+					
+						<img   class="img-fluid img-profile rounded-circle mx-auto mb-2"  src="{{asset('img/12.jpg')}}"width="300px"> 
+            
+				</div>
+				<div class="col-md-6 col-lg-7 pl-md-4 pl-lg-5 py-5">
+					<div class="py-md-5">
+						<div class="row justify-content-start pb-3">
+							<div class="col-md-12 heading-section ftco-animate">
+              {% for education in user.education %}
+								
+								<h1 class="mb-4" style="font-size: 34px; text-transform: capitalize;"><i class="fa fa-graduation-cap"></i>Education</h1>
+								<ul class="about-info mt-4 px-md-0 px-2">
+									<li class="d-flex"><span>Etablissement:</span><span>{{education.institue}}</span></li>
+									<li class="d-flex"><span>Titre:</span>{{education.titre}}</li>
+									<li class="d-flex"><span>Specialite:</span> <span>{{education.specialite}}</span></li>
+									<li class="d-flex"><span>Annee:</span> <span>{{education.annee}}</span></li>
+									
+								</ul>
+             <br>
+             <br>
+           {% for diplome in education.diplome %}
+             <div class="resume-item d-flex flex-column flex-md-row mb-5">
+               <div class="resume-content mr-auto">
+                <div class="media block-8 services d-block bg-white rounded-lg shadow ftco-animate">
+					      	<div class="icon d-flex align-items-center justify-content-center"><i class="fa fa-id-card-o"></i></div>
+                      <h4 class="mb-2">Diplome:</h4>
+                      <div><span>Montion:</span><p>{{diplome.montion}}</p></div>
+                      <div ><span>Année:</span>{{diplome.annee}}</div><button type="submit" class="btn btn-lg btn-primary"><a  href="{{path('app_diplome_index')}}"><span class="fa fa-edit  "></span>Edit</a></button>
+                  </div>
+               </div>
+             </div>
+          </div>{% endfor %}<button type="submit" class="btn btn-lg btn-primary"><a  href="{{path('app_educations_index')}}"><span class="fa fa-edit  "></span>Edit Education</a></button>
+        </div>{% endfor %}
+							
+				</div>
+			</div>
+		</div>
+	</section>
+        
+
+      <section class="ftco-section bg-light" id="skills-section">
+		<div class="container">
+			<div class="row justify-content-center pb-5">
+				<div class="col-md-12 heading-section text-center ftco-animate">
+					<span class="subheading">Competences</span>
+					<div class="subheading mb-3"> Languages de Programmation </div>
+				</div>
+			</div>
+      
+			<div class="row progress-circle mb-5">
+				<div class="col-lg-5 mb-5">
+					<div class="bg-white rounded-lg shadow p-4">
+          <div class="container">
+                  <div class="row">
+                  {% for competences in user.competences %}
+                          <div class="col-lg-7 mb-5">
+                            <h2 class="h5 font-weight-bold text-center mb-4">{{competences.technologies}}</h2>
+                            <!-- Progress bar 1 -->
+                            <div class="progress mx-auto" data-value='{{competences.pourcentage}}'>
+                              <span class="progress-left">
+                                <span class="progress-bar border-primary"></span>
+                              </span>
+                              <span class="progress-right">
+                                <span class="progress-bar border-primary"></span>
+                              </span>
+                              <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
+                                <div class="h2 font-weight-bold">{{competences.pourcentage}}<sup class="small">%</sup></div>
+                              </div>
+                            </div>
+                            <div class="row text-center mt-4">
+                              <div class="col-12 ">
+                                <span class="small text-gray text-center">{{competences.niveau}}</span>
+                              </div>	
+                            </div>
+                          </div>
+                  {% endfor %}<button type="submit" class="btn btn-lg btn-primary"><a  href="{{path('app_competences_index')}}"><span class="fa fa-edit  "></span>Edit</a></button>
+                        </div>
+                      </div>
+                            <!-- END -->
+                    </div>
+                </div> 
+             <div class="row d-flex no-gutters">
+                <div class="col-md-4 col-lg-5 d-flex">
+                   <img src="{{asset('img/78.jpg')}}"width="300px" height="1600px">  
+                </div>
+					   </div>
+		      </div>
+				</div>
+			</div>
+	   <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="awards">
+      	<div class="container">
+			<div class="row d-flex no-gutters">
+				<div class="col-md-4 col-lg-5 d-flex">
+						<img src="{{asset('img/45.jpg')}}"width="200px"> 
+				</div>
+				<div class="col-md-6 col-lg-7 pl-md-4 pl-lg-5 py-5">
+					<div class="py-md-5">
+						<div class="row justify-content-start pb-3">
+							<div class="col-md-12 heading-section ftco-animate">
+                <h2 class="mb-5"><i class="fa fa-certificate"></i>Certifications</h2>
+                 {% for certificat in user.certificat %} 
+                    <div> 
+                      <ul class="fa-ul mb-0">
+                        <li>
+                          <i class="fa-li fa fa-trophy text-warning"></i>
+                          {{certificat.NomCertificat}}-{{certificat.duree}}- {{certificat.domaine}}
+                        </li>
+                      </ul>  
+                      {% endfor %}<button type="submit" class="btn btn-lg btn-primary"><a  href="{{path('app_certificat_index')}}"><span class="fa fa-edit  "></span>Edit</a></button></div>
+                    </div>
+                  </div>
+      </section>
+      	<section class="ftco-section testimony-section bg-info"id ="projects">
+		<div class="container">
+			<div class="row justify-content-center pb-5">
+				<div class="col-md-12 heading-section heading-section-white text-center ftco-animate">
+					<span class="subheading">Projets Personnels</span>{% for projetspersonnel in user.projetspersonnel %}
+					<h2 class="mb-4">{{projetspersonnel.idee}}-{{projetspersonnel.technologies}}</h2>
+					<p>{{projetspersonnel.description}}</p>
+				</div>
+			</div>
+			<div class="row ftco-animate">
+				<div class="col-md-12">
+        {% for multimedia in projetspersonnel.multimedia %}
+					<div class="carousel-testimony owl-carousel">
+						<div class="item">
+							<div class="testimony-wrap py-4">
+								<div class="text">
+								
+									<a href="{{multimedia.lien}}">Voir </a>
+									<div class="d-flex align-items-center">
+										<div class="pl-3">
+											<span class="position"> {{multimedia.type}}</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+          {% endfor %}
+           {% endfor %}
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+	
+      <section id ="contact">
+      <footer class="ftco-footer ftco-section">
+		 <div class="container px-4 px-lg-5">
+              
+              
+               
+				<div class="col-md">
+					<div class="ftco-footer-widget mb-4">
+						<h2 class="ftco-heading-2">tu pose  Questions?</h2>
+						<div class="block-23 mb-3">
+							<ul>
+								<li><span class="icon fa fa-map marker"></span><span class="text">{{user.addresse}}</span></li>
+								<li><a href="#"><span class="icon fa fa-phone"></span><span class="text">{{user.numtel}}</span></a></li>
+								<li><a href="#"><span class="icon fa fa-paper-plane pr-4"></span><span class="text">{{user.email}}</span></a></li>
+							</ul>
+						</div>
+						<ul class="ftco-footer-social list-unstyled mt-2"> {% for parametres in user.parametres %}
+							<li class="ftco-animate"><a href="{{parametres.twitter}}"><span class="fa fa-twitter"></span></a></li>
+							<li class="ftco-animate"><a href="{{parametres.facebook}}"><span class="fa fa-facebook"></span></a></li>
+							<li class="ftco-animate"><a href="{{parametres.git}}"><span class="fa fa-github"></span></a></li>
+              	<li class="ftco-animate"><a href="{{parametres.linkidin}}"><span class="fa fa-linkedin"></span></a></li>
+						 {% endfor %}</ul>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 text-center">
+					<p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						Copyright &copy;Its PRO'COMM
+						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+					</div>
+				</div>
+			</div>
+		</footer> </section>
+    <script src="{{asset('js/jquery.min.js')}}"></script>
+		<script src="{{asset('js/jquery-migrate-3.0.1.min.js')}}"></script>
+		<script src="{{asset('js/popper.min.js')}}"></script>
+		<script src="{{asset('js/bootstrap.min.js')}}"></script>
+		<script src="{{asset('js/jquery.easing.1.3.js')}}"></script>
+		<script src="{{asset('js/jquery.waypoints.min.js')}}"></script>
+		<script src="{{asset('js/jquery.stellar.min.js')}}"></script>
+		<script src="{{asset('js/owl.carousel.min.js')}}"></script>
+		<script src="{{asset('js/jquery.magnific-popup.min.js')}}"></script>
+		<script src="{{asset('js/jquery.animateNumber.min.js')}}"></script>
+		<script src="{{asset('js/scrollax.min.js')}}"></script>
+		<script src="{{asset('https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false')}}"></script>
+		<script src="{{asset('js/google-map.j')}}s"></script>
+		<script>
+    const cursor = document.querySelector('.cursor');
+    document.addEventListener('mousemove', (e) =>{
+      cursor.style.left = e.pageX + 'px';
+      cursor.style.right = e.pageY +'px';
+    })
+    </script>
+		<script src="{{asset('js/main.js')}}"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script src="{{asset("vendor/jquery/jquery.min.js")}}"></script>
+    <script src="{{asset("vendor/bootstrap/js/bootstrap.bundle.min.js")}}"></script>
+    <!-- Plugin JavaScript -->
+    <script src="{{asset("vendor/jquery-easing/jquery.easing.min.js")}}"></script>
+    <!-- Custom scripts for this template -->
+    <script src="{{asset("js/resume.min.js")}}"></script>
+ <script src="{{asset("https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js")}}"></script>
+ </body>
+</html>

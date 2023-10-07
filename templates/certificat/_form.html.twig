@@ -1,0 +1,25 @@
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card mt-5">
+        
+        <div class="card-body">
+          {{ form_start(form) }}
+            <div class="form-group">
+               {{ form_row(form.NomCertificat, {'attr': {'class': 'form-control form-control-lg', 'placeholder': 'Nom du certificat'}}) }}
+            </div>
+            <div class="form-group">
+               {{ form_row(form.duree, {'attr': {'class': 'form-control form-control-lg', 'placeholder': 'Durée du certificat'}}) }}
+            </div>
+            <div class="form-group">
+               {{ form_row(form.domaine, {'attr': {'class': 'form-control form-control-lg', 'placeholder': 'Domaine du certificat',}}) }}
+            </div>
+            <div class="text-center">
+              <button class="btn btn-lg btn-success">{{ button_label|default('Enregistrer') }}</button>
+            </div>
+          {{ form_end(form) }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

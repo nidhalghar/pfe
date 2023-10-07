@@ -1,0 +1,92 @@
+{% extends 'base.candidat.html.twig' %}
+
+{% block title %}Hello ProjetspersonnelController!{% endblock %}
+{% block stylesheets %} 
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+        .fixed-form {
+    position: fixed;
+    top: 0;
+    right: 35%;
+    bottom: 0;
+    width: 50%;
+    padding: 100px;
+    overflow-y: auto;
+}
+</style>
+{% endblock %}
+{% block javascripts %}
+  
+{% endblock %}
+{% block image %}{{asset(user.image)}}{% endblock %}
+{% block body %}
+
+
+ 
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-7 border-right">
+      <!-- Deuxième partie de l'écran -->
+      <div class="form-container fixed-form">
+       <h2>ProjetsPersonnel</h2>
+         {{ form_start(projetspersonnelForm) }}
+           <div class="form-group">
+             {{ form_row(projetspersonnelForm.idee, {'attr': {'class': 'form-control form-control-lg', 'placeholder': 'saisire votre idee'}}) }}
+           </div>
+          <div class="form-group">
+             {{ form_row(projetspersonnelForm.duree, {'attr': {'class': 'form-control form-control-lg', 'placeholder': 'Durée'}}) }}
+           </div>
+          <div class="form-group">
+             {{ form_row(projetspersonnelForm.technologies, {'attr': {'class': 'form-control form-control-lg', 'placeholder': 'Technologies'}}) }}
+          </div>
+          <div class="form-group">
+             {{ form_row(projetspersonnelForm.description, {'attr': {'class': 'form-control form-control-lg', 'placeholder': 'Description'}}) }}
+          </div>
+          <div id="multimedia"></div>
+           <h3>Multimedia</h3>
+             <div class="form-group">
+               <div class="form-check form-check-inline">
+                 <input class="form-check-input" type="button" name="multimedia" id="multimediaOui" value="ajouter Multimedia">
+               </div>
+             </div><br>
+                       <button type="submit" class="btn btn-lg btn-primary">Ajouter</button>
+             <div class="text-center">             
+                {{ form_end(projetspersonnelForm) }}
+             </div>
+           </div>
+     </div>
+    <div class="col-md-5 border-left">
+     <!-- Première partie de l'écran -->
+      <h2 class="text-center">Portfolio</h2>
+<script src="{{asset("https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js")}}"></script>
+  <script>$( document ).ready(function() {
+    var m=1; 
+     $("#multimediaOui").click(function(){
+     $("#multimedia").append (' <div class="form-group" >'+
+      ' <label >Type '+m+':</label>'+
+       ' <input type="float" class="form-control" name="multimedias[]">'+
+       ' <label >Lien '+m+':</label>'+
+         ' <input type="text" class="form-control" name="multimedias[]">'+
+       ' </div>');
+      });
+    });
+   </script> 
+   <script> const form = $('#multimedia');
+
+// Ajoute un écouteur d'événement pour soumettre le formulaire
+   form.on('submit', (event) => {
+  // Empêche le formulaire de se soumettre normalement
+     event.preventDefault();
+
+  // Récupère les valeurs du formulaire
+     const formData = form.serialize();
+
+  // Affiche les valeurs dans un élément de la page
+  const resultat = $('#mult');
+  resultat.html(formData);
+});
+</script>
+   <script src="{{asset("https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js")}}"></script>    
+  </body>  
+{% endblock %}

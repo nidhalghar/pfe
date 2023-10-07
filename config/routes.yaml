@@ -1,0 +1,9 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+#homepage:
+ # path: /
+  #controller: App\Controller\ProfilController::show
+recruteur:
+   path: /recruteur
+   controller: App\Controller\RecruteurController::dashboard

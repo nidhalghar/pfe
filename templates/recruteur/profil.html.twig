@@ -1,0 +1,135 @@
+{% extends 'base.recruteur.html.twig' %}
+
+{% block title %}Profil{% endblock %}
+{% block stylesheets %} 
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+{% endblock %}
+{% block javascripts %}
+  
+{% endblock %}
+
+{% block body %}
+<link rel="stylesheet" href="{{asset("css/profil.css")}}" />
+
+<div class="container"> {% for parametres in user.parametres %}
+    <div class="img" style="    background-image: linear-gradient(150deg, rgba(63, 174, 255, .3)15%, rgba(63, 174, 255, .3)70%, rgba(63, 174, 255, .3)94%), url({{asset(parametres.photoCouv)}});
+    height: 350px;background-size: cover;"></div> {% endfor %}
+    <div class="card social-prof">
+        <div class="card-body">
+            <div class="wrapper">
+                <img src="{% block image %}{{asset(app.user.image)}}{% endblock %}" alt="" class="user-profile">
+                <h3>{{app.user.nomsocitie}}</h3>
+                <p>{{user.domaineactivite}}</p>
+            </div>
+            <div class="row ">
+                <div class="col-lg-12">
+                {% for parametres in user.parametres %}
+                    <ul class=" nav nav-tabs justify-content-center s-nav">
+                        <li><a href="{{parametres.facebook}}"><span class="fa fa-facebook"></span></a></li>
+                        <li><a href="{{parametres.linkidin}}"><span class="fa fa-linkedin"></span></a></li>
+                        <li><a href="{{parametres.twitter}}"><span class="fa fa-twitter"></span></a></li>
+                        <li><a href="{{parametres.git}}"><span class="fa fa-github"></span></a></li>
+                    
+                    </ul>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body info-card social-about">
+                    <h2 class="text-blue">A propos</h2>
+                    
+                    <p></p>
+                    <h4 class="mb-3"><strong>Informations du Sosiéte</strong></h4>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="social-info">
+                                <i class="fas fa-birthday-cake mr-2"></i>
+                                <span>{{user.datedecreation|date("d-m-Y")}}</span>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="social-info">
+                                <i class="fas fa-map-marker-alt mr-2"></i>
+                                <span>{{user.addresse}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="social-info">
+                                <i class="fas fas fa-users mr-2"></i>
+                                <span>Nombre de Salaries : {{user.nombredesalaries}}</span>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="social-info">
+                                <i class="fas fa-briefcase mr-2"></i>
+                                <span>{{user.nomrh}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="social-info">
+                                <i class="fas fas fa-mobile mr-2"></i>
+                                <span>{{user.fax}}</span>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="social-info">
+                                <i class="fas fas fa-envelope mr-2"></i>
+                                <span>{{user.email}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+             {% for postes in user.postes %}  
+                     <div class="col-lg-12">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                 <div class="container">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                  <img class="img-profile rounded-circle"src="{{asset(user.image)}}" width="50px">{{app.user.nomsocitie}} </div>                           
+                                           </div>
+                                            <small> Publier le : {{postes.createdAt|date("d-m-Y")}}</small>
+                                            
+                                             
+                                   
+                                  </div>
+                                </div>
+                                <div class="card-body">
+                                  <section class="page-section" id="contact">
+                                   <div class="container">
+                                     <div class="row justify-content-center mb-12">
+                                         <div class="col-lg-12"> 
+                                             <img  src="{{asset(postes.affiche)}}"width="420px">   
+                                         <ul class="fa-ul mb-0">
+                                             <li>
+                                             <i class="fa-li fa fa-check"></i>
+                                           <h4><h3>{{postes.Titre}}</h3></h4> <h5> {{postes.description}}</h5><p>Salaire: {{postes.salaire}}</p></li>      
+                                         <br>
+                                         <br>
+                                         </ul>
+                                      </div>
+                                    </div>
+                                   </div>
+                               </div>
+                           </div>
+                        </div>
+                       {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

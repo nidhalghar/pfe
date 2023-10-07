@@ -1,0 +1,295 @@
+{% extends 'base_front.html.twig' %}
+{% block title %}Accueil | Portofolio {% endblock %}
+{% block stylesheets %} 
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    .poste-image {
+        width: 500px;
+        /* Autres styles si nécessaire */
+    }
+
+  .custom-btn {
+    width: 485px; /* Vous pouvez ajuster la valeur selon vos besoins */
+  }
+
+
+</style>
+{% endblock %}
+{% block javascripts %}
+{% endblock %}
+{% block body %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.0/css/bootstrap.min.css" integrity="sha512-xxx" crossorigin="anonymous" />
+
+    <body id="page-top">
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href="#page-top">Portfolio</a>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto my-2 my-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="#about">A propos </a></li>
+                        <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                    
+                        <li class="nav-item"><a class="nav-link" href="#contact">contact</a></li>
+                        {% if (app.user is not null) %}
+                            {% if (app.user.roles[0] == 'ROLE_CANDIDAT')%}
+                        <li class="nav-item"><a class="nav-link" href="{{ path('app_profil') }}">{{app.user.nom}} {{app.user.prenom}} <img class="img-profile rounded-circle"src="{{asset(app.user.image)}}" width="40px"></a></li>
+                            {% elseif (app.user.roles[0] == 'ROLE_RECRUTEUR') %}
+                        <li class="nav-item"><a class="nav-link" href="{{ path('app_postule') }}">{{app.user.nomsocitie}}  <img class="img-profile rounded-circle"src="{{asset(app.user.image)}}" width="40px"></a></li>
+                              {% elseif (app.user.roles[0] == 'ROLE_ADMIN') %}
+                        <li class="nav-item"><a class="nav-link" href="{{ path('app_admin') }}">{{app.user.nom}} {{app.user.prenom}} <img class="img-profile rounded-circle"src="{{asset(app.user.image)}}" width="40px"></a></li>
+                            {% endif %}
+                         <li class="nav-item"><a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a></li>    
+                        {% else %}
+                        <li class="nav-item"><a class="nav-link" href="{{ path('app_login') }}">Se connecter</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Masthead-->
+        <header class="masthead">
+            <div class="container px-4 px-lg-5 h-100">
+                <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
+                    <div class="col-lg-8 align-self-end">
+                        <h1 class="text-white font-weight-bold">Votre endroit préféré pour obtenir un portefeuille</h1>
+                        <hr class="divider" />
+                    </div>
+                    <div class="col-lg-8 align-self-baseline">
+                        <p class="text-white-75 mb-5">Portfolio peut vous aider à construire un meilleur portefeuille </p>
+                          <div class="search-container">
+                          <div class="row">
+                            <div class="col-lg-11 align-self-baseline">
+                             <form  method="GET">
+                                 <input type="text" name="u" value="{{ query }}"  class="form-control" id="inputEmail2" placeholder="Recherchez un utilisateur...">
+                                    <br>
+                                    <br> </div>   <div class="col-lg-1 align-self-baseline">            
+                             <button type="submit" class="btn btn-primary">Rechercher</button></div></div>
+                              </form>
+                               
+                      {% if users is not empty %}
+    <div class="media block-8 services d-block bg-white rounded-lg shadow ftco-animate">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">nom</th>
+                    <th scope="col">prenom</th>
+                    <th scope="col">email</th>
+                    <th scope="col">image</th>
+                    <th scope="col">lien</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users[0] %}
+                    <tr>
+                        <td>{{ user.nom }}</td>
+                        <td>{{ user.prenom }}</td>
+                        <td>{{ user.email }}</td>
+                        <td><img class="img-profile rounded-circle" src="{{ asset(user.image) }}" width="50px"></td>
+                        <td><a href="{{ path('app_portfolio_link', {'link': user.id}) }}" class="btn btn-success"><i class="fas fa-home"></i> Voir</a></td>
+
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% else %}
+    aucun résultat
+{% endif %}
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- About-->
+      <section class="page-section bg-danger" id="about">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h1 class="text-white font-weight-bold text-center">Bienvenue sur notre plateforme</h1>
+                <hr class="divider" />
+                <h3 class="text-white-75 mb-5 text-center">Si vous souhaitez créer votre propre portfolio, veuillez cliquer sur ce bouton</h3> 
+                <a class="btn btn-light btn-xl" href="{{ path('app_parametres') }}">Créer un portfolio</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+        <!-- Services-->
+   {% if (app.user is not null) %}      
+   {% if (app.user.roles[0] == 'ROLE_CANDIDAT')%}
+<section class="ftco-section testimony-section bg-primary"id="services">
+ 
+                            
+		<div class="container">
+			<div class="row justify-content-center pb-5">
+				<div class="col-md-12 heading-section heading-section-white text-center ftco-animate">
+					<span class="subheading">Les Postes Disponibles</span>
+					<h2 class="mb-4">Merci de Consulter Ces postes</h2>
+				</div>
+			</div>
+			<div class="row ftco-animate">
+				<div class="col-md-12">
+                
+					<div class="carousel-testimony owl-carousel">
+                    {% for poste in postes %}
+                    {% if poste.domaine == user.domaine %}
+						<div class="item">
+							<div class="testimony-wrap py-4">
+								<div class="text">
+									<span class="fa fa-quote-left"></span>
+									 <img src="{{ asset(poste.affiche) }}" class="poste-image" alt="Affiche du poste">
+
+									<div class="d-flex align-items-center">
+										
+										<div class="pl-3">
+											<h4>{{poste.Titre}}<br><h5>Salaire :{{poste.salaire}}</h5></h4>
+											<span class="position">{{poste.description}}</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+                           {% endif %}
+                           {% endfor %} 
+					</div>
+                 
+				</div>
+			</div>
+		</div>
+        {% endif %}
+
+	</section>
+    {% endif %}
+    {% if (app.user is not null) %}      
+   {% if (app.user.roles[0] == 'ROLE_RECRUTEUR')%}
+<section class="ftco-section testimony-section bg-dark"id="services">
+<div class="container">
+			<div class="row justify-content-center pb-5">
+				<div class="col-md-12 heading-section heading-section-white text-center ftco-animate">
+					<span class="subheading">Les candidats Disponibles</span>
+					<h2 class="mb-4">Merci de Consulter Ces portfolio</h2>
+				</div>
+			</div>
+			<div class="row ftco-animate">
+				<div class="col-md-12">
+                
+					<div class="carousel-testimony owl-carousel">
+                    {% for can in candidat %}
+                        {% if (can.roles[0] == 'ROLE_CANDIDAT')%}
+                        {% if (can.domaine == user.domaineactivite )%}
+						<div class="item">
+							<div class="testimony-wrap py-4">
+								<div class="text">
+									<span class="fa fa-quote-left"></span>
+                                    {% for parametres in user.parametres %}
+									<p class="mb-4 pl-5">{{parametres.paragraphe}}</p>
+                                     {% endfor %} 
+									<div class="d-flex align-items-center">
+										<div class="user-img" style="background-image: url({{ asset(can.image) }})"></div>
+										<div class="pl-3">
+											<h5>{{can.nom}}<br><h6>{{can.prenom}}</h6></h5>
+											<span class="position">{{can.numtel}}</span><a href="{{ path('app_portfolio_link', {'link': user.id}) }}" class="btn btn-success"><i class="fas fa-home"></i> Voir</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+                         {% endif %}
+                           {% endif %}
+                           {% endfor %} 
+					</div>
+                 
+				</div>
+			</div>
+		</div>
+        {% endif %}
+</section>
+    {% endif %}
+    {% if app.user is empty %}
+    <section class="ftco-section  bg-info"id="services">
+
+                         
+            <div class="container px-4 px-lg-5">
+                <h2 class="text-center mt-0">à votre service</h2>
+                <hr class="divider" />
+                <div class="row gx-4 gx-lg-5">
+                    <div class="col-lg-3 col-md-6 text-center">
+                        <div class="mt-5">
+                            <div class="mb-2"><i class="bi-gem fs-1 text-primary"></i></div>
+                            <h3 class="h4 mb-2">Thèmes robustes</h3>
+                            <p class="text-muted mb-0">Nos thèmes sont mis à jour régulièrement pour les garder sans bogue!</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 text-center">
+                        <div class="mt-5">
+                            <div class="mb-2"><i class="bi-laptop fs-1 text-primary"></i></div>
+                            <h3 class="h4 mb-2">À jour</h3>
+                            <p class="text-muted mb-0">Toutes les dépendances sont tenues à jour pour garder les choses à jour.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 text-center">
+                        <div class="mt-5">
+                            <div class="mb-2"><i class="bi-globe fs-1 text-primary"></i></div>
+                            <h3 class="h4 mb-2">Prêt à publier</h3>
+                            <p class="text-muted mb-0">Vous pouvez utiliser cette conception telle quelle, ou vous pouvez apporter des modifications !</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 text-center">
+                        <div class="mt-5">
+                            <div class="mb-2"><i class="bi-heart fs-1 text-primary"></i></div>
+                            <h3 class="h4 mb-2">Fait avec amour</h3>
+                            <p class="text-muted mb-0">Est-ce vraiment open source si ce n'est pas fait avec amour ?</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% endif %}
+        <!-- Contact-->
+        <section class="page-section" id="contact">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-lg-8 col-xl-6 text-center">
+                        <h2 class="mt-0">Entrons en contact !</h2>
+                        <hr class="divider" />
+                        <p class="text-muted mb-5">Prêt à démarrer votre prochain projet avec nous ? Envoyez-nous un message et nous vous répondrons dans les plus brefs délais !</p>
+                    </div>
+                </div>
+                <div class="row gx-4 gx-lg-5 justify-content-center mb-5">
+                    <div class="col-lg-6">
+                     <div class="container">
+                        {% for message in app.flashes('success') %}
+                        <div class="alert alert-success mt-4">
+                        {{ message }}
+                        </div>
+                        {% endfor %}
+                        {{form_start(formulaire)}}
+                            <div class="form-group">
+                                {{ form_row(formulaire.nom, {'attr': {'class': 'form-control form-control-lg', 'placeholder': 'Nom'}}) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(formulaire.email, {'attr': {'class': 'form-control form-control-lg', 'placeholder': '@gmail'}}) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(formulaire.sujet, {'attr': {'class': 'form-control form-control-lg', 'placeholder': 'Sujet'}}) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(formulaire.message, {'attr': {'class': 'form-control form-control-lg', 'placeholder': 'Ecrire ici*..'}}) }}
+                            </div>
+                            <button type="submit" class="btn btn-lg btn-primary custom-btn">Envoyer</button>
+
+                        {{form_end(formulaire)}}
+                        </div>
+                    </div>
+                </div>
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-lg-4 text-center mb-5 mb-lg-0">
+                        <i class="bi-phone fs-2 mb-3 text-muted"></i>
+                        <div>+(216) 20890101</div>
+                    </div>
+                </div>
+            </div>
+        </section>  
+    </body>
+{% endblock %}

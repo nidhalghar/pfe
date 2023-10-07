@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration Page</title>
+      <link rel="stylesheet" href="{{asset("css/style22.css")}}" rel="shortcut icon">
+      <link rel="stylesheet" href="{{asset("build/css/intlTelInput.css")}}" />
+    <link rel="stylesheet" href="{{asset("build/css/demo.css")}}" />
+    {% block stylesheets %}
+    <style>
+     /* Style pour le conteneur du formulaire */
+.form-container {
+  max-width: 500px;
+  margin: auto;
+  padding: 20px;
+  background-color: #f2f2f2;
+  border-radius: 5px;
+}
+
+/* Style pour les champs de formulaire */
+.form-control {
+  margin-bottom: 10px;
+  width: 100%;
+  height: 40px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+/* Style pour les boutons de formulaire */
+.btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #3e8e41;
+}
+
+/* Style pour les cases à cocher */
+.form-check-input {
+  margin-right: 10px;
+  height: 20px;
+  width: 20px;
+  vertical-align: middle;
+}
+
+/* Style pour le texte associé à la case à cocher */
+.form-check-label {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+/* Style pour la boîte de validation */
+.alert {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #f44336;
+  color: white;
+  border-radius: 5px;
+}
+
+    </style>
+        {% endblock %}
+</head>
+<body>
+    <div class="modernForm">
+        <div class="imageSection">
+            <div class="image">
+                <div class="overlay"></div>
+                <img src="img/woman-checking-giant-check-list_23-2148099800.avif" alt="pexels-yuri-manei-2272854">
+            </div>
+            <div class="textInside">
+            </div>
+        </div>
+        <div class="contactForm">
+            <h1 class="text-center">Inscription</h1>
+            {{ form_start(registreForm) }}
+            <form>
+                <div class="name">
+                    {{ form_row(registreForm.nomsocitie, {'label': 'Nom Societe', 'attr': {'class': 'form-control
+                    form-control-lg', 'placeholder': 'Societe'}}) }}
+                  <div class="iconName"><i class="fa-solid fa-user"></i></div>
+                </div>
+                <div class="name">
+                    {{ form_row(registreForm.nomrh, {'label': 'Ressource Humaine', 'attr': {'class': 'form-control
+                    form-control-lg', 'placeholder': 'NOM RH'}}) }}
+                  <div class="iconName"><i class="fa-solid fa-envelope"></i></i></div>
+                </div>
+                    <div class="name">
+                    {{ form_row(registreForm.datedecreation, {'label': 'Date de Creation'}) }}
+                  <div class="iconName"><i class="fa-solid fa-envelope"></i></i></div>
+                </div>
+                        <div class="name">
+                    {{ form_row(registreForm.fax, {'label': 'fax', 'attr': {'class': 'form-control
+                            form-control-lg', 'placeholder': 'fax'}}) }}
+                  <div class="iconName"><i class="fa-solid fa-envelope"></i></i></div>
+                </div>
+                    <br>
+                <div class="name">
+                    {{ form_row(registreForm.adresse, {'label': 'Adresse', 'attr': {'class': 'form-control
+                            form-control-lg', 'placeholder': 'addresse'}}) }}
+                  <div class="iconName"><i class="fa-solid fa-envelope"></i></i></div>
+                </div>
+                <div class="name">
+                    {{ form_row(registreForm.nombredesalaries, {'label': 'Nombre de Salaries', 'attr': {'class': 'form-control
+                    form-control-lg', 'placeholder': 'saisir le Nombre'}}) }}
+                  <div class="iconName"><i class="fa-solid fa-envelope"></i></i></div>
+                </div>
+                <div class="name">
+                    {{ form_row(registreForm.domaineactivite, {'label': 'Domaine Activite', 'attr': {'class': 'form-control
+                    form-control-lg', 'placeholder': 'tapez votre domaine'}}) }}
+                  <div class="iconName"><i class="fa-solid fa-envelope"></i></i></div>
+                </div>
+                <div class="name">
+                    {{ form_row(registreForm.email, {'attr': {'class': 'form-control
+                    form-control-lg', 'placeholder': 'Email'}}) }}
+                  <div class="iconName"><i class="fa-solid fa-envelope"></i></i></div>
+
+                </div>
+                <div class="name">
+                    {{ form_row(registreForm.plainPassword, {'label': 'Mot de passe', 'attr': {'class':
+                    'form-control form-control-lg', 'placeholder': 'mot de passe'}}) }}
+                  <div class="iconName"><i class="fa-solid fa-lock"></i></div>
+                </div>
+                <div class="form-group">
+                    {{ form_label(registreForm.photo, 'Photo') }}
+                    <div class="input-group">
+                        <div class="custom-file">
+                            {{ form_widget(registreForm.photo, {'attr': {'class': 'custom-file-input', 'id': 'photo-input', 'aria-describedby': 'photo-label', 'accept': 'image/*'}}) }}
+                            <label class="custom-file-label" for="photo-input">Choisissez une Photo de Profil</label>
+                        </div>
+                        <div class="input-group-append">
+                            <span class="input-group-text" id="photo-label"><i class="fa-solid fa-upload"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="form-check">
+                  {{ form_widget(registreForm.agreeTerms, {'attr': {'class': 'form-check-input'}}) }}
+                  <label class="form-check-label" for="{{registreForm.agreeTerms.vars.id }}">J'accepte les termes et conditions d'utilisation</label>
+                </div>
+                <input type="submit" value="valider">
+                {{ form_end(registreForm) }}
+                </div>
+    </div>  <script src="build/js/intlTelInput.js"></script>
+    <script>
+      var input = document.querySelector("#phone");
+      window.intlTelInput(input, {
+        utilsScript: "build/js/utils.js"
+      });
+    </script>
+</body>
+</html>

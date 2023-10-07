@@ -1,0 +1,75 @@
+{% extends 'base.candidat.html.twig' %}
+
+{% block title %} Education{% endblock %}
+{% block stylesheets %} 
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+        .fixed-form {
+    position: fixed;
+    top: 0;
+    right: 35%;
+    bottom: 0;
+    width: 50%;
+    padding: 100px;
+    overflow-y: auto;
+}
+</style>
+{% endblock %}
+
+{% block image %}{{asset(user.image)}}{% endblock %}
+{% block body %}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-7 border-right">
+      <!-- Deuxième partie de l'écran -->
+      <div class="form-container fixed-form">
+         <h2 class="text-center">Education</h2>
+           {{ form_start(educationForm) }}
+              <div class="form-group">
+                {{ form_row(educationForm.annee, {'attr': {'class': 'form-control form-control-lg', 'placeholder': 'Année'}}) }}
+              </div>
+              <div class="form-group">
+                {{ form_row(educationForm.specialite, {'attr': {'class': 'form-control form-control-lg', 'placeholder': 'Specialite'}}) }}
+              </div>
+              <div class="form-group">
+                {{ form_row(educationForm.titre, {'attr': {'class': 'form-control form-control-lg', 'placeholder': 'Titre'}}) }}
+              </div>
+              <div class="form-group">
+                {{ form_row(educationForm.institue, {'attr': {'class': 'form-control form-control-lg', 'placeholder': 'Institue'}}) }}
+              </div>
+              <br>
+              <div id="diplome"></div>
+                <h3>Diplome</h3>
+                 <div class="form-group">
+                    <div class="form-check form-check-inline">
+                       <input class="form-check-input" type="button" name="diplome" id="diplomeOui" value="ajouter Diplome">
+                    </div>
+                 </div>
+                 <br>
+                               <button type="submit" class="btn btn-lg btn-primary">Ajouter</button>
+              <div class="text-center">            
+           {{ form_end(educationForm) }}
+     </div>
+   </div>
+  </div>
+   <div class="col-md-5 border-left">
+     <!-- Première partie de l'écran -->
+       <h2 class="text-center">Portfolio</h2>
+       {% block javascripts %}
+  
+<script src="{{asset("https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js")}}"></script>
+    <script>$( document ).ready(function() {
+      var m=1; 
+       $("#diplomeOui").click(function(){
+        $("#diplome").append (' <div class="form-group" >'+
+         ' <label >Année '+m+':</label>'+
+         ' <input type="float" class="form-control" name="diplomes[]">'+
+         ' <label >Montion '+m+':</label>'+
+         ' <input type="text" class="form-control" name="diplomes[]">'+
+       ' </div>');
+      });
+    });
+    </script>   
+    {% endblock %}    
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'base.certificat.html.twig' %}
+{% block image %}{{asset(app.user.image)}}{% endblock %}
+{% block title %}Education index{% endblock %}
+
+{% block body %}
+    <div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <h1>Index des éducations</h1>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Année</th>
+            <th>Spécialité</th>
+            <th>Titre</th>
+            <th>Institut</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for education in education %}
+          <tr>
+            <td>{{ education.annee }}</td>
+            <td>{{ education.specialite }}</td>
+            <td>{{ education.titre }}</td>
+            <td>{{ education.institue }}</td>
+            <td>
+              <a href="{{ path('app_educations_show', {'id': education.id}) }}" class="btn btn-info">Afficher</a>
+              <a href="{{ path('app_educations_edit', {'id': education.id}) }}" class="btn btn-primary">Modifier</a>
+            </td>
+          </tr>
+          {% else %}
+          <tr>
+            <td colspan="6">Aucun enregistrement trouvé.</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <a href="{{ path('app_education') }}" class="btn btn-success">Créer une nouvelle éducation</a>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

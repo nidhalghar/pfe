@@ -1,0 +1,36 @@
+{% extends 'base.certificat.html.twig' %}
+{% block image %}{{asset(app.user.image)}}{% endblock %}
+{% block title %}Education{% endblock %}
+
+{% block body %}
+    <h1>Education</h1>
+<table class="table">
+  <tbody>
+    <tr>
+      <th>Id</th>
+      <td>{{ education.id }}</td>
+    </tr>
+    <tr>
+      <th>Annee</th>
+      <td>{{ education.annee }}</td>
+    </tr>
+    <tr>
+      <th>Specialite</th>
+      <td>{{ education.specialite }}</td>
+    </tr>
+    <tr>
+      <th>Titre</th>
+      <td>{{ education.titre }}</td>
+    </tr>
+    <tr>
+      <th>Institue</th>
+      <td>{{ education.institue }}</td>
+    </tr>
+  </tbody>
+</table>
+<a href="{{ path('app_educations_index') }}" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Back to list</a>
+
+<a href="{{ path('app_educations_edit', {'id': education.id}) }}" class="btn btn-warning"><i class="fas fa-edit"></i> Edit</a>
+
+{{ include('educations/_delete_form.html.twig') }} 
+{% endblock %}

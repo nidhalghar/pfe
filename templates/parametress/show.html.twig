@@ -1,0 +1,56 @@
+{% extends 'base.certificat.html.twig' %}
+{% block image %}{{asset(app.user.image)}}{% endblock %}
+{% block title %}Parametres{% endblock %}
+
+{% block body %}
+  <div class="card">
+  <div class="card-header">
+    <h3 class="card-title">Parametres</h3>
+  </div>
+  <div class="card-body">
+    <table class="table">
+      <tbody>
+        <tr>
+          <th>Id</th>
+          <td>{{ parametre.id }}</td>
+        </tr>
+        <tr>
+          <th>Loisires</th>
+          <td>{{ parametre.loisires }}</td>
+        </tr>
+        <tr>
+          <th>Facebook</th>
+          <td>{{ parametre.facebook }}</td>
+        </tr>
+        <tr>
+          <th>Paragraphe</th>
+          <td>{{ parametre.paragraphe }}</td>
+        </tr>
+        <tr>
+          <th>Linkidin</th>
+          <td>{{ parametre.linkidin }}</td>
+        </tr>
+        <tr>
+          <th>Twitter</th>
+          <td>{{ parametre.twitter }}</td>
+        </tr>
+        <tr>
+          <th>Git</th>
+          <td>{{ parametre.git }}</td>
+        </tr>
+        <tr>
+          <th>LinkPublic</th>
+          <td>{{ parametre.linkPublic }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="d-flex justify-content-between align-items-center mt-4">
+      <a href="{{ path('app_parametress_index') }}" class="btn btn-secondary"><i class="fas fa-arrow-left me-2"></i>Back to list</a>
+      <div>
+        <a href="{{ path('app_parametress_edit', {'id': parametre.id}) }}" class="btn btn-primary"><i class="fas fa-edit me-2"></i>Edit</a>
+        {{ include('parametress/_delete_form.html.twig', {'label': '<i class="fas fa-trash-alt me-2"></i>Delete', 'attr': {'class': 'btn btn-danger'}}) }}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

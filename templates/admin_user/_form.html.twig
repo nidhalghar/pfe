@@ -1,0 +1,53 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            {{ form_start(form) }}
+            <form class="form">
+                <div class="form-group">
+                    {{ form_row(form.nom, {'label': 'Nom', 'attr': {'class': 'form-control form-control-lg', 'placeholder': 'Nom'}}) }}
+                    <div class="icon"><i class="fa-solid fa-user"></i></div>
+                </div>
+                <div class="form-group">
+                    {{ form_row(form.prenom, {'label': 'Prénom', 'attr': {'class': 'form-control form-control-lg', 'placeholder': 'Prénom'}}) }}
+                    <div class="icon"><i class="fa-solid fa-user"></i></div>
+                </div>
+                <div class="form-group">
+                    {{ form_row(form.datedenaissance, {'label': 'Date de naissance', 'attr': {'class': 'form-control form-control-lg'}}) }}
+                    <div class="icon"><i class="fa-solid fa-calendar-alt"></i></div>
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.numtel, 'Téléphone') }}
+                    <div class="input-group">
+                        {{ form_widget(form.numtel, {'attr': {'class': 'form-control form-control-lg', 'type':'number', 'placeholder': 'Numéro de téléphone'}}) }}
+                        <div class="input-group-append">
+                            <div class="input-group-text"><i class="fa-solid fa-phone"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ form_row(form.addresse, {'label': 'Adresse', 'attr': {'class': 'form-control form-control-lg', 'placeholder': 'Adresse'}}) }}
+                    <div class="icon"><i class="fa-solid fa-map-marker-alt"></i></div>
+                </div>
+                <div class="form-group">
+                    {{ form_row(form.domaine, {'label': 'Domaine', 'attr': {'class': 'form-control form-control-lg', 'placeholder': 'Domaine'}}) }}
+                    <div class="icon"><i class="fa-solid fa-tags"></i></div>
+                </div>
+              
+                <div class="form-group">
+                    {{ form_row(form.email, {'label': 'Email', 'attr': {'class': 'form-control form-control-lg', 'placeholder': 'Email'}}) }}
+                    <div class="icon"><i class="fa-solid fa-envelope"></i></div>
+                </div>
+                <div class="form-group">
+                    {{ form_row(form.plainPassword, {'label': 'Mot de passe', 'attr': {'class': 'form-control form-control-lg', 'placeholder': 'Mot de passe'}}) }}
+                    <div class="icon"><i class="fa-solid fa-lock"></i></div>
+                </div><br>
+                 <div class="text-center">
+    <button class="btn btn-primary rounded-pill px-5 py-2">{{ button_label|default('Enregistrer') }}</button>
+                 </div>
+
+
+            </form>
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>

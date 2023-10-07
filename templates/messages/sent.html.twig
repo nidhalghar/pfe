@@ -1,0 +1,71 @@
+{% if app.user.roles[0] == 'ROLE_RECRUTEUR' %}
+    {% include 'base.recruteur.html.twig' %}
+{% elseif app.user.roles[0] == 'ROLE_CANDIDAT' %}
+    {% include 'base.msg.html.twig' %}
+{% endif %}
+
+{% block body %}
+<section class="container my-5">
+  <div class="row">
+    <div class="col-12">
+      <h2>Éléments envoyés</h2>
+      <p>Vous avez envoyé : {{app.user.sent|length}}</p>
+    </div>
+  </div>
+
+  <div class="row border-top border-bottom py-2">
+    <div class="col-3 fw-bold">De</div>
+    <div class="col-3 fw-bold">Sujet</div>
+    <div class="col-3 fw-bold">Date</div>
+    <div class="col-3 fw-bold">Actions</div>
+  </div>
+
+  {% for message in app.user.sent %}
+  {% set bold = ""%}
+  {% if message.isRead == 0 %}
+  {% set bold = "fw-bold" %}
+  {% endif %}
+  <div class="row py-2 {{bold}}">
+    <div class="col-3">{{message.sender.email}}</div>
+    <div class="col-3"><a href="{{ path("app_read",{id:message.id})}}">{{message.titre}}</a></div>
+    <div class="col-3">{{message.createdAt|date}}</div>
+    <div class="col-3">
+      <a href="{{ path("app_delete",{id: message.id})}}">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-excel-fill text-danger" viewBox="0 0 16 16">
+          <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM5.884 4.68 8 7.219l2.116-2.54a.5.5 0 1 1 .768.641L8.651 8l2.233 2.68a.5.5 0 0 1-.768.64L8 8.781l-2.116 2.54a.5.5 0 0 1-.768-.641L7.349 8 5.116 5.32a.5.5 0 1 1 .768-.64z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+  {% endfor %}
+
+  <div class="row mt-3">
+    <div class="col">
+      <a class="btn btn-outline-secondary me-2" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">Voir mes dossiers</a>
+      <a href="{{path("app_messages")}}" class="btn btn-primary">Envoyer un message</a>
+    </div>
+  </div>
+</section>
+      <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+  <div class="offcanvas-header">
+    <h2 class="offcanvas-title" id="offcanvasExampleLabel">Mes Dossiers</h2>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+     <div class="list-group">
+     <a href="{{path("app_messages")}}" class="list-group-item list-group-item-action ">Acceuil</a>
+     </div> 
+           <div class="list-group">
+  <a href="{{ path("app_recevied") }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+    Boîte de réception
+    <span class="badge bg-primary rounded-pill">{{ app.user.received|length }}</span>
+  </a>
+</div>
+         <div class="list-group">
+  <a href="{{ path("app_sent") }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+    Elément envoyer
+    <span class="badge bg-primary rounded-pill">{{ app.user.sent|length }}</span>
+  </a>
+</div>
+</div>
+{% endblock %}

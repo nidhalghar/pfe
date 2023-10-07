@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+          {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+        <link href="{{asset("vendor/bootstrap/css/bootstrap.min.css")}}" rel="stylesheet">
+        <link href="{{asset("https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:100,200,300,400,500,600,700,800,900")}}" rel="stylesheet">
+        <link href="{{asset("https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i")}}" rel="stylesheet">
+        <link href="{{asset("vendor/font-awesome/css/font-awesome.min.css")}}" rel="stylesheet">
+        <link href="{{asset("vendor/devicons/css/devicons.min.css")}}" rel="stylesheet">
+        <link href="{{asset("vendor/simple-line-icons/css/simple-line-icons.css")}}" rel="stylesheet">
+      
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+    
+        {% block body %} 
+{% endblock %}
+ <!-- Bootstrap core JavaScript -->
+    <script src="{{asset("vendor/jquery/jquery.min.js")}}"></script>
+    <script src="{{asset("vendor/bootstrap/js/bootstrap.bundle.min.js")}}"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="{{asset("vendor/jquery-easing/jquery.easing.min.js")}}"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="{{asset("js/resume.min.js")}}"></script>
+    </body>
+     
+ <script src="{{asset("https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js")}}"></script>
+
+
+</html>
